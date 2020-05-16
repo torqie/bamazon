@@ -17,7 +17,6 @@ connection.connect(function(err) {
 });
 
 function showProducts() {
-  // Displaying an initial list of products for the user, calling promptSupervisor
   connection.query("SELECT * FROM products", function(err, res) {
     if (err) throw err;
     console.table(res);
@@ -26,7 +25,6 @@ function showProducts() {
 }
 
 function promptQuestions() {
-  // Giving the user some options for what to do next
   inquirer.prompt([
         {
           type: "list",
@@ -51,7 +49,6 @@ function promptQuestions() {
 }
 
 function viewSales() {
-  // Selects a few columns from the departments table, calculates a total_profit column
   connection.query(
       "SELECT dept.department_id, dept.department_name, dept.over_head_costs, " +
       "SUM(IFNULL(prod.product_sales, 0)) as product_sales, " +
@@ -59,9 +56,9 @@ function viewSales() {
       "FROM products prod " +
       "RIGHT JOIN departments dept ON prod.department_name = dept.department_name " +
       "GROUP BY " +
-      "   dept.department_id, " +
-      "   dept.department_name, " +
-      "   dept.over_head_costs",
+      "dept.department_id, " +
+      "dept.department_name, " +
+      "dept.over_head_costs",
       function(err, res) {
         if(err) throw err;
         console.table(res);
@@ -77,8 +74,7 @@ function addDepartment() {
           type: "input",
           name: "name",
           message: "What is the name of the department?"
-        },
-        {
+        }, {
           type: "input",
           name: "overhead",
           message: "What is the overhead cost of the department?",
