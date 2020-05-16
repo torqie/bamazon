@@ -49,3 +49,23 @@ function promptQuestions() {
         }
       });
 }
+
+function viewSales() {
+  // Selects a few columns from the departments table, calculates a total_profit column
+  connection.query(
+      "SELECT dept.department_id, dept.department_name, dept.over_head_costs, " +
+      "SUM(IFNULL(prod.product_sales, 0)) as product_sales, " +
+      "SUM(IFNULL(prod.product_sales, 0)) - dept.over_head_costs as total_profit " +
+      "FROM products prod " +
+      "RIGHT JOIN departments dept ON prod.department_name = dept.department_name " +
+      "GROUP BY " +
+      "   dept.department_id, " +
+      "   dept.department_name, " +
+      "   dept.over_head_costs",
+      function(err, res) {
+        if(err) throw err;
+        console.table(res);
+        promptQuestions();
+      }
+  );
+}
