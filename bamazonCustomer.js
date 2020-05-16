@@ -22,11 +22,11 @@ function loadProducts() {
   connection.query(query, (err, res) => {
     if(err) throw err;
     console.table(res);
-    promptForItem(res);
+    questionForItem(res);
   })
 }
 
-function promptForItem(products) {
+function questionItem(products) {
   inquirer.prompt({
     type: "input",
     name: "item",
@@ -36,7 +36,7 @@ function promptForItem(products) {
     const product = checkInventory(choice, products);
 
     if(product) {
-      promptForQuantity(product)
+      questionQuantity(product)
     } else {
       console.log("\nThat item does not exist in our inventory");
       loadProducts();
@@ -44,7 +44,7 @@ function promptForItem(products) {
   })
 }
 
-function promptForQuantity(product) {
+function questionQuantity(product) {
  inquirer.prompt({
    type: "input",
    name: "quantity",
@@ -72,9 +72,10 @@ function checkInventory(choice, products) {
 }
 
 function purchase(product, quantity) {
-  connection.query("UPDATE products SET stock_quantity = stock_quantity - ?,  WHERE item_id = ?",
-      [quantity, product.item_id],
+  connection.query("UPDATE products SET stock_quantity = stock_quantity - ?, product_sales = product_sales + ? WHERE item_id = ?",
+      [quantity, product.price * quantity, product.item_id],
       (err, res) => {
+        if(err) throw err;
         console.log("\nYou purchased " + quantity + " " + product.product_name);
         loadProducts();
       });
