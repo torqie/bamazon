@@ -24,3 +24,28 @@ function showProducts() {
     promptQuestions();
   });
 }
+
+function promptQuestions() {
+  // Giving the user some options for what to do next
+  inquirer.prompt([
+        {
+          type: "list",
+          name: "choice",
+          message: "What would you like to do?",
+          choices: ["View Product Sales by Department", "Create New Department", "Quit"]
+        }
+      ])
+      .then(function(answer) {
+        // Checking to see what option the user chose and running the appropriate function
+        if (answer.choice === "View Product Sales by Department") {
+          viewSales();
+        }
+        else if (answer.choice === "Create New Department") {
+          addDepartment();
+        }
+        else {
+          console.log("Goodbye!");
+          process.exit(0);
+        }
+      });
+}
