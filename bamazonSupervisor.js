@@ -69,3 +69,32 @@ function viewSales() {
       }
   );
 }
+
+function addDepartment() {
+  // Asking the user about the department they would like to add
+  inquirer.prompt([
+        {
+          type: "input",
+          name: "name",
+          message: "What is the name of the department?"
+        },
+        {
+          type: "input",
+          name: "overhead",
+          message: "What is the overhead cost of the department?",
+          validate: function(val) {
+            return val > 0;
+          }
+        }
+      ])
+      .then(function(answer) {
+        connection.query(
+            "INSERT INTO departments (department_name, over_head_costs) VALUES (?, ?)",
+            [answer.name, answer.overhead], function(err) {
+              if (err) throw err;
+              console.log("ADDED DEPARTMENT!");
+              showProducts();
+            }
+        );
+      });
+}
