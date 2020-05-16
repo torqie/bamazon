@@ -15,3 +15,12 @@ connection.connect(function(err) {
   console.log("connection successful!");
   showProducts();
 });
+
+function showProducts() {
+  // Displaying an initial list of products for the user, calling promptSupervisor
+  connection.query("SELECT * FROM products", function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    promptQuestions();
+  });
+}
