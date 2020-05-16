@@ -72,7 +72,7 @@ function checkInventory(choice, products) {
 }
 
 function purchase(product, quantity) {
-  connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id = ?",
+  connection.query("UPDATE products SET stock_quantity = stock_quantity - ?,  WHERE item_id = ?",
       [quantity, product.item_id],
       (err, res) => {
         console.log("\nYou purchased " + quantity + " " + product.product_name);
