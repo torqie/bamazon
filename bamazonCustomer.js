@@ -18,11 +18,11 @@ connection.connect(function(err) {
 });
 
 function loadProducts() {
-  const query = "SELECT * FROM products";
+  const query = "SELECT item_id, product_name, department_name, price, stock_quantity FROM products";
   connection.query(query, (err, res) => {
     if(err) throw err;
     console.table(res);
-    questionForItem(res);
+    questionItem(res);
   })
 }
 
