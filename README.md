@@ -9,6 +9,7 @@ As the customer you will be able to look and buy items. As you buy items the sto
 
 #### Demo
 ![enter image description here](screenshots/bamazonCustomer.gif)
+
 Command To run: ` node bamazonCustomer.js `
 
 
@@ -17,6 +18,7 @@ As a manager you can view the current stock, check for items that are low on sto
 
 #### Demo
 ![enter image description here](screenshots/bamazonManager.gif)
+
 Command To run: ` node bamazonManager.js `
 
 ## Supervisor
@@ -24,6 +26,7 @@ As a supervisor you can view departments sales, overhead, and profit. The superv
 
 #### Demo
 ![enter image description here](screenshots/bamazonSupervisor.gif)
+
 Command To run: ` node bamazonSupervisor.js `
 
 ## Installation
@@ -39,7 +42,9 @@ Command To run: ` node bamazonSupervisor.js `
 
 ` npm install `
 
-* Now open up [mysql workbench](https://www.mysql.com/products/workbench/) or [sequelpro](https://www.sequelpro.com/) login to your mysql server and run the follow query to create the database, tables, and add some data to the tables.
+* Now open up [mysql workbench](https://www.mysql.com/products/workbench/) or [sequelpro](https://www.sequelpro.com/) 
+login to your mysql server and run the following query to create the database, tables, and add some data to the tables.
+
 ```
 DROP DATABASE IF EXISTS bamazon;  
 CREATE DATABASE bamazon;  
