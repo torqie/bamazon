@@ -12,14 +12,15 @@ const connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) throw err;
-  console.log("connection successful!");
-  showProducts();
+  promptQuestions();
 });
 
 function showProducts() {
   connection.query("SELECT * FROM products", function(err, res) {
     if (err) throw err;
+    console.log("\n\n===============================================================================================\n");
     console.table(res);
+    console.log("===============================================================================================\n\n");
     promptQuestions();
   });
 }
@@ -61,7 +62,9 @@ function viewSales() {
       "dept.over_head_costs",
       function(err, res) {
         if(err) throw err;
+        console.log("\n\n===============================================================================================\n");
         console.table(res);
+        console.log("===============================================================================================\n\n");
         promptQuestions();
       }
   );

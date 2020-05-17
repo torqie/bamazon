@@ -21,7 +21,9 @@ function loadProducts() {
   const query = "SELECT item_id, product_name, department_name, price, stock_quantity FROM products";
   connection.query(query, (err, res) => {
     if(err) throw err;
+    console.log("\n\n===============================================================================================\n");
     console.table(res);
+    console.log("===============================================================================================\n\n");
     questionItem(res);
   })
 }

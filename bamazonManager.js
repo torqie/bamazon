@@ -18,7 +18,7 @@ connection.connect(function(err) {
 });
 
 function loadMenu() {
-  connection.query("SELECT * FROM products", function(err, res) {
+  connection.query("SELECT item_id, product_name, department_name, price, stock_quantity FROM products", function(err, res) {
     if (err) throw err;
     loadOptions(res);
   });
@@ -33,7 +33,9 @@ function loadOptions(products) {
     }).then(answer => {
       switch (answer.choice) {
       case "View Products for Sale":
+      console.log("\n\n===============================================================================================\n");
         console.table(products);
+        console.log("===============================================================================================\n\n");
         loadMenu();
         break;
       case "View Low Inventory":
@@ -54,15 +56,19 @@ function loadOptions(products) {
 }
 
 function loadLowInventory() {
-  connection.query("SELECT * FROM products WHERE stock_quantity <= 5", function(err, res) {
+  connection.query("SELECT item_id, product_name, department_name, price, stock_quantity FROM products WHERE stock_quantity <= 5", function(err, res) {
     if (err) throw err;
+    console.log("\n\n===============================================================================================\n");
     console.table(res);
+    console.log("===============================================================================================\n\n");
     loadMenu();
   });
 }
 
 function addToInventory(inventory) {
+  console.log("\n\n===============================================================================================\n");
   console.table(inventory);
+  console.log("===============================================================================================\n\n");
   inquirer.prompt([
     {
       type: "input",
